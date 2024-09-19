@@ -1,0 +1,23 @@
+<script src="https://cdn.jsdelivr.net/npm/keycloak-js@25.0.5/dist/keycloak.min.js"></script>
+
+<script>
+    const oath2IssuerId = 4;
+    const keycloak = new Keycloak({
+        url: '{{keycloak_url}}',
+        realm: '{{realm}}',
+        clientId: '{{client_id}}'
+    });
+
+    keycloak.init({ onLoad: 'check-sso' }).then(function(authenticated) {
+        const loginUrl = `${M.cfg.wwwroot}/auth/oauth2/login.php?id=${oath2IssuerId}&wantsurl=${M.cfg.wwwroot}&sesskey=${M.cfg.sesskey}`;
+        const logoutUrl = `${M.cfg.wwwroot}/login/logout.php?sesskey=${M.cfg.sesskey}`
+        
+        if (authenticated && !M.cfg.is_logged_in && !window.location.href.includes('/auth/oauth2/login.php')) {
+            window.location.href = loginUrl;
+        }
+        
+        if (!authenticated && M.cfg.is_logged_in) {
+            window.location.href = logoutUrl;
+        }
+    });
+</script>
