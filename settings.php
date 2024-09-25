@@ -26,4 +26,11 @@ if ($hassiteconfig) {
         get_string('keycloak_url_desc', 'local_keycloak_cs'),
         'http://keycloakurl.site'
     ));
+
+    $settings->add(new admin_setting_configtext(
+        'local_keycloak_cs/silent_redirect_url',
+        get_string('silent_redirect_url', 'local_keycloak_cs'),
+        get_string('silent_redirect_url_desc', 'local_keycloak_cs'),
+        'http://your.site/my'
+    ));
 }

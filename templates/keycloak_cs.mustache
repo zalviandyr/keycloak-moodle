@@ -8,15 +8,18 @@
         clientId: '{{client_id}}'
     });
 
-    keycloak.init({ onLoad: 'check-sso' }).then(function(authenticated) {
+    keycloak.init({
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: '{{silent_redirect_url}}'
+    }).then(function(authenticated) {
         const loginUrl = `${M.cfg.wwwroot}/auth/oauth2/login.php?id=${oath2IssuerId}&wantsurl=${M.cfg.wwwroot}&sesskey=${M.cfg.sesskey}`;
         const logoutUrl = `${M.cfg.wwwroot}/login/logout.php?sesskey=${M.cfg.sesskey}`
-        
-        if (authenticated && !M.cfg.is_logged_in && !window.location.href.includes('/auth/oauth2/login.php')) {
+
+        if (authenticated && !{{is_logged_in}} && !window.location.href.includes('/auth/oauth2/login.php')) {
             window.location.href = loginUrl;
         }
-        
-        if (!authenticated && M.cfg.is_logged_in) {
+
+        if (!authenticated && {{is_logged_in}}) {
             window.location.href = logoutUrl;
         }
     });
