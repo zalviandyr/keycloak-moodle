@@ -8,8 +8,7 @@ function local_keycloak_cs_extend_navigation(\navigation_node $nav) {
         'keycloak_url' => get_config('local_keycloak_cs', 'keycloak_url'),
         'client_id' => get_config('local_keycloak_cs', 'client_id'),
         'realm' => get_config('local_keycloak_cs', 'realm'),
-        'silent_redirect_url' => get_config('local_keycloak_cs', 'silent_redirect_url'),
-        'is_logged_in' => $USER->id !== 0,
+        'is_logged_in' => $USER->id !== 0 ? 'true' : 'false',
     ]);
     echo $html;
 }
