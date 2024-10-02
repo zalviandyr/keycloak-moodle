@@ -4,7 +4,7 @@ defined('MOODLE_INTERNAL') || die();
 function local_keycloak_cs_extend_navigation(\navigation_node $nav) {
     global $PAGE, $USER, $CFG, $OUTPUT, $DB;
 
-    $issuer = $DB->get_record_select('oauth2_issuer', 'enabled = 1');
+    $issuer = $DB->get_record_select('oauth2_issuer', 'enabled = 1 and showonloginpage = 1');
     if ($issuer) {
         $baseUrl = $issuer->baseurl;
         $baseUrl = explode('/realms/', $baseUrl);
