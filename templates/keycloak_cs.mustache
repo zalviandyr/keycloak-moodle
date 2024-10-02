@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/keycloak-js@25.0.5/dist/keycloak.min.js"></script>
 
 <script>
-    const oath2IssuerId = 4;
+    const oath2IssuerId = {{issuer_id}};
     const keycloak = new Keycloak({
         url: '{{keycloak_url}}',
         realm: '{{realm}}',
